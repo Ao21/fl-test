@@ -58,14 +58,14 @@ export class Game {
 	}
 
 	/**
-  * Create Game Board
-  * 
-  * @param {Position} size 
-  * @param {Position} start 
-  * @param {Position} exit 
-  * @param {DIRECTION} direction 
-  * @memberof Game
-  */
+	* Create Game Board
+	* 
+	* @param {Position} size 
+	* @param {Position} start 
+	* @param {Position} exit 
+	* @param {DIRECTION} direction 
+	* @memberof Game
+	*/
 	createBoard(
 		size: Size,
 		start: Position,
@@ -92,13 +92,13 @@ export class Game {
 	}
 
 	/**
-  * Check whether position is inside board limits
-  * 
-  * @param {Position} { x, y } 
-  * @param {boolean} [hard=true] 
-  * @returns 
-  * @memberof Game
-  */
+	* Check whether position is inside board limits
+	* 
+	* @param {Position} { x, y } 
+	* @param {boolean} [hard=true] 
+	* @returns 
+	* @memberof Game
+	*/
 	checkWithinLimits({ x, y }: Position, hard = true) {
 		if (x < 0 || x >= this.xLimit || y < 0 || y >= this.yLimit) {
 			if (hard) {
@@ -111,11 +111,11 @@ export class Game {
 	}
 
 	/**
-  * Add Mines to Gameboard
-  * 
-  * @param {Position[]} mines 
-  * @memberof Game
-  */
+	* Add Mines to Gameboard
+	* 
+	* @param {Position[]} mines 
+	* @memberof Game
+	*/
 	addMines(mines: Position[]) {
 		mines.forEach(mine => {
 			if (this.checkWithinLimits(mine)) {
@@ -125,33 +125,33 @@ export class Game {
 	}
 
 	/**
-  * Check if mine exists at this position
-  * 
-  * @param {Position} position 
-  * @returns 
-  * @memberof Game
-  */
+	* Check if mine exists at this position
+	* 
+	* @param {Position} position 
+	* @returns 
+	* @memberof Game
+	*/
 	checkForMine(position: Position) {
 		return this.board[position.x][position.y] === MARKER.MINE ? true : false;
 	}
 
 	/**
-  * Check if exit exists at this position
-  * 
-  * @param {Position} position 
-  * @returns 
-  * @memberof Game
-  */
+	* Check if exit exists at this position
+	* 
+	* @param {Position} position 
+	* @returns 
+	* @memberof Game
+	*/
 	checkForExit(position: Position) {
 		return this.board[position.x][position.y] === MARKER.EXIT ? true : false;
 	}
 
 	/**
-  * Add Exit to the gameboard
-  * 
-  * @param {Position} exit 
-  * @memberof Game
-  */
+	* Add Exit to the gameboard
+	* 
+	* @param {Position} exit 
+	* @memberof Game
+	*/
 	addExit(exit: Position) {
 		if (this.checkWithinLimits(exit)) {
 			this.board[exit.x][exit.y] = MARKER.EXIT;
@@ -159,11 +159,11 @@ export class Game {
 	}
 
 	/**
-  * Run through a list of moves and then announce the results
-  * 
-  * @param {string[]} moves 
-  * @memberof Game
-  */
+	* Run through a list of moves and then announce the results
+	* 
+	* @param {string[]} moves 
+	* @memberof Game
+	*/
 	play(moves: string[]) {
 		const res = moves.map((m: any) => {
 			return this.handleAction(m);
@@ -177,12 +177,12 @@ export class Game {
 	}
 
 	/**
-  * Console.log the Result
-  * 
-  * @param {*} result 
-  * @returns 
-  * @memberof Game
-  */
+	* Console.log the Result
+	* 
+	* @param {*} result 
+	* @returns 
+	* @memberof Game
+	*/
 	announce(result: any) {
 		switch (result) {
 			case RESULTS.OUT_OF_BOUNDS:
@@ -197,12 +197,12 @@ export class Game {
 	}
 
 	/**
-  * Hande the action for this move
-  * 
-  * @param {ACTION} move 
-  * @returns 
-  * @memberof Game
-  */
+	* Hande the action for this move
+	* 
+	* @param {ACTION} move 
+	* @returns 
+	* @memberof Game
+	*/
 	handleAction(move: ACTION) {
 		switch (move) {
 			case ACTION.MOVE:
@@ -213,11 +213,11 @@ export class Game {
 	}
 
 	/**
-  * Update the currentPosition
-  * 
-  * @returns RESULT
-  * @memberof Game
-  */
+	* Update the currentPosition
+	* 
+	* @returns RESULT
+	* @memberof Game
+	*/
 	move() {
 		switch (this.direction) {
 			case DIRECTION.NORTH:
@@ -262,11 +262,11 @@ export class Game {
 	}
 
 	/**
-   * Rotate and set the new direction
-   * 
-   * @returns RESULT
-   * @memberof Game
-   */
+	 * Rotate and set the new direction
+	 * 
+	 * @returns RESULT
+	 * @memberof Game
+	 */
 	rotate() {
 		this.direction < 3 ? this.direction++ : (this.direction = 0);
 		return RESULTS.DANGER;
